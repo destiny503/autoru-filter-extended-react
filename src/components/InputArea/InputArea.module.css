@@ -1,0 +1,22 @@
+.input {
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: rgba(250, 235, 215, 0.7);
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: text;
+}
+
+input:focus {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    outline: none;
+    color: rgb(0, 0, 0);
+}
+
+input::selection {
+    background-color: rgb(255, 255, 255);
+}

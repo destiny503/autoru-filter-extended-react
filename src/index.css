@@ -1,0 +1,9 @@
+body {
+    background-color: rgb(47, 47, 47);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lato", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}

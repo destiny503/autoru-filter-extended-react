@@ -1,0 +1,18 @@
+.actionPad {
+    position: absolute;
+    top: 100%;
+    z-index: 1000;
+}
+.actionPad button {
+    width: 25px;
+}
+
+.add {
+    background-color: rgb(60, 130, 60);
+    color: white
+}
+
+.exc {
+    background-color: rgb(180, 60, 60);
+    color: white
+}
