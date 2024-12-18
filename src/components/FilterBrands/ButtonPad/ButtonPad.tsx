@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { brandData } from '../../../assets/brands';
-import ActionPad from '../ActionPad/ActionPad';
+import { useState } from "react";
+import { brandData } from "../../../assets/brands";
+import ActionPad from "../ActionPad/ActionPad";
 
-import s from './ButtonPad.module.css';
+import s from "./ButtonPad.module.css";
 
 interface ButtonPadProps {
   onAdd: (filter: string, color: string, brand: string, brandName: string) => void;
@@ -10,14 +10,15 @@ interface ButtonPadProps {
 }
 
 const ButtonPad: React.FC<ButtonPadProps> = ({ onAdd, selectedBrands }) => {
-  const [actionPadPosition, setActionPadPosition] = useState<{
-    top: number;
-    left: number;
-    brand: string | null;
+  const [actionPad, setActionPad] = useState<{
+    position: { top: number; left: number } | null;
+    activeBrand: string | null;
     brandName: string;
-  } | null>(null);
-
-  const [activeBrand, setActiveBrand] = useState<string | null>(null);
+  }>({
+    position: null,
+    activeBrand: null,
+    brandName: "",
+  });
 
   const handleBrandClick = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -25,44 +26,47 @@ const ButtonPad: React.FC<ButtonPadProps> = ({ onAdd, selectedBrands }) => {
     brandName: string
   ) => {
     const { bottom, left, width } = e.currentTarget.getBoundingClientRect();
-    const actionPadWidth = 50
-
-    setActionPadPosition({
-      top: bottom + window.scrollY,
-      left: left + window.scrollX + width / 2 - actionPadWidth / 2,
-      brand,
+    setActionPad({
+      position: {
+        top: bottom + window.scrollY,
+        left: left + window.scrollX + width / 2,
+      },
+      activeBrand: brand,
       brandName,
     });
-
-    setActiveBrand(brand); 
   };
 
   const closeActionPad = () => {
-    setActionPadPosition(null);
-    setActiveBrand(null);
+    setActionPad({ position: null, activeBrand: null, brandName: "" });
+  };
+
+  const getButtonClass = (brand: string, special: boolean | undefined) => {
+    return [
+      special && s.secretVendor,
+      actionPad.activeBrand === brand && s.activeButton,
+    ]
+      .filter(Boolean)
+      .join(" ");
   };
 
   return (
     <div className={s.buttonPad}>
-      {brandData.map((brand) => (
+      {brandData.map(({ brand, name, special }) => (
         <button
-          key={brand.brand}
-          onClick={(e) => handleBrandClick(e, brand.brand, brand.name)}
-          disabled={selectedBrands.includes(brand.brand)}
-          className={
-            `${brand.special ? s.secretVendor : ""} 
-            ${activeBrand === brand.brand ? s.activeButton : ""}`
-          }
+          key={brand}
+          onClick={(e) => handleBrandClick(e, brand, name)}
+          disabled={selectedBrands.includes(brand)}
+          className={getButtonClass(brand, special)}
         >
-          {brand.name}
+          {name}
         </button>
       ))}
-      {actionPadPosition && actionPadPosition.brand && (
+      {actionPad.position && actionPad.activeBrand && (
         <ActionPad
-          top={actionPadPosition.top}
-          left={actionPadPosition.left}
-          brand={actionPadPosition.brand}
-          brandName={actionPadPosition.brandName}
+          top={actionPad.position.top}
+          left={actionPad.position.left}
+          brand={actionPad.activeBrand}
+          brandName={actionPad.brandName}
           onAdd={onAdd}
           closeActionPad={closeActionPad}
         />

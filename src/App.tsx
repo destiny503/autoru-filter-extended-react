@@ -1,25 +1,17 @@
 import { useState } from "react";
-import Header from './components/Header/Header'
-import InputArea from './components/InputArea/InputArea'
-import FilterBrands from './components/FilterBrands/FilterBrands'
+import Header from './components/Header/Header';
+import InputArea from './components/InputArea/InputArea';
+import FilterBrands from './components/FilterBrands/FilterBrands';
 import Popup from "./components/Popup/Popup";
+import useFilters from './hooks/useFilters';
 
-import s from './App.module.css'
+import s from './App.module.css';
 
 const App: React.FC = () => {
   const [inputValue, setInputValue] = useState("https://auto.ru/cars/used/?");
-  const [filters, setFilters] = useState<Array<{ filter: string, color: string, brand: string, brandName: string }>>([]);
   const [showPopup, setShowPopup] = useState(false);
 
-  const handleAddFilter = (filter: string, color: string, brand: string, brandName: string) => {
-    setInputValue((prev) => `${prev}${filter}`);
-    setFilters((prev) => [...prev, { filter, color, brand, brandName }]);
-  };
-
-  const handleExcludeFilter = (filter: string) => {
-    setInputValue((prev) => prev.replace(filter, ''));
-    setFilters((prev) => prev.filter(f => f.filter !== filter));
-  };
+  const { filters, addFilter, removeFilter, resetFilters } = useFilters();
 
   const handleInputClick = () => {
     navigator.clipboard.writeText(inputValue);
@@ -35,21 +27,27 @@ const App: React.FC = () => {
 
   const resetState = () => {
     setInputValue("https://auto.ru/cars/used/?");
-    setFilters([]);
+    resetFilters();
   };
 
   return (
     <div className={s.wrapper}>
-      <Header onReset={resetState} onOpenPage={handleOpenPage}/>
-      <InputArea value={inputValue} onClick={handleInputClick}/>
+      <Header onReset={resetState} onOpenPage={handleOpenPage} />
+      <InputArea value={inputValue} onClick={handleInputClick} />
       {showPopup && <Popup message="Скопировано!" />}
       <FilterBrands 
-        onAdd={handleAddFilter} 
-        onExclude={handleExcludeFilter} 
-        filters={filters} 
+        onAdd={(filter, color, brand, brandName) => {
+          addFilter({ filter, color, brand, brandName });
+          setInputValue((prev) => `${prev}${filter}`);
+        }}
+        onExclude={(filter) => {
+          removeFilter(filter);
+          setInputValue((prev) => prev.replace(filter, ""));
+        }}
+        filters={filters}
       />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

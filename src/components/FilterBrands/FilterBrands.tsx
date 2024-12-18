@@ -1,12 +1,13 @@
 import ButtonPad from './ButtonPad/ButtonPad'
 import RemovalPad from './RemovalPad/RemovalPad'
+import { Filter } from '../../hooks/useFilters';
 
 import s from './FilterBrands.module.css'
 
 interface FilterBrandsProps {
   onAdd: (filter: string, color: string, brand: string, brandName: string) => void;
   onExclude: (filter: string) => void;
-  filters: Array<{ filter: string, color: string, brand: string, brandName: string }>;
+  filters: Filter[];
 }
 
 const FilterBrands: React.FC<FilterBrandsProps> = ({ onAdd, onExclude, filters }) => {
