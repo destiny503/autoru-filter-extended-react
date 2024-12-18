@@ -1,0 +1,12 @@
+.secretSort {
+    color: black;
+    background-color: rgb(255, 230, 0);
+    box-shadow: 0 0 5px rgb(255, 230, 0);
+}
+
+.active {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.9);
+    outline: none;
+    color: rgb(0, 0, 0);
+}

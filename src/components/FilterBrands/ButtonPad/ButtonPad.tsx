@@ -29,7 +29,7 @@ const ButtonPad: React.FC<ButtonPadProps> = ({ onAdd, selectedBrands }) => {
     setActionPad({
       position: {
         top: bottom + window.scrollY,
-        left: left + window.scrollX + width / 2,
+        left: left + window.scrollX + width / 2 - 50 / 2,
       },
       activeBrand: brand,
       brandName,

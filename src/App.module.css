@@ -20,3 +20,10 @@ button {
     outline: none;
     border-radius: 7px;
 }
+
+.separator {
+    margin: 8px 0;
+    border-bottom: 5px solid rgba(119, 119, 119, 0.3);
+    border-radius: 10px;
+    width: 99%;
+}

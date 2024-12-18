@@ -17,15 +17,19 @@ const ActionPad: React.FC<ActionPadProps> = ({
   onAdd,
   closeActionPad
 }) => {
-  const addFilter = `catalog_filter=vendor%3D${brand.toUpperCase()}&`;
-  const excludeFilter = `exclude_catalog_filter=vendor%3D${brand.toUpperCase()}&`;
+  const filterPrefix = brand.includes("VENDOR")
+    ? `catalog_filter=vendor%3D${brand.toUpperCase()}&`
+    : `catalog_filter=mark%3D${brand.toUpperCase()}&`;
+  const excludeFilter = brand.includes("VENDOR")
+    ? `exclude_catalog_filter=vendor%3D${brand.toUpperCase()}&`
+    : `exclude_catalog_filter=mark%3D${brand.toUpperCase()}&`;
 
   return (
     <div className={s.actionPad} style={{
       top:`${top}px`,
       left: `${left}px`,
     }}>
-      <button className={s.add} onClick={() => { onAdd(addFilter, 'rgb(60, 130, 60)', brand, brandName); closeActionPad(); }}>+</button>
+      <button className={s.add} onClick={() => { onAdd(filterPrefix, 'rgb(60, 130, 60)', brand, brandName); closeActionPad(); }}>+</button>
       <button className={s.exc} onClick={() => { onAdd(excludeFilter, 'rgb(180, 60, 60)', brand, brandName); closeActionPad(); }}>-</button>
     </div>
   );
