@@ -1,5 +1,5 @@
-import iconEraser from '../../assets/eraser.svg'
-import iconSearch from '../../assets/search.svg'
+import iconEraser from '../../shared/ui/eraser.svg'
+import iconSearch from '../../shared/ui/search.svg'
 
 import s from './Header.module.css'
 

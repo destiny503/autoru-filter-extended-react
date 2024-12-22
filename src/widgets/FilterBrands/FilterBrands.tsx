@@ -1,6 +1,6 @@
-import ButtonPad from './ButtonPad/ButtonPad'
-import RemovalPad from './RemovalPad/RemovalPad'
-import { Filter } from '../../hooks/useFilters';
+import ButtonPad from '../../features/ButtonPad/ButtonPad'
+import RemovalPad from '../../features/RemovalPad/RemovalPad'
+import { Filter } from '../../shared/hooks/useFilters';
 
 import s from './FilterBrands.module.css'
 

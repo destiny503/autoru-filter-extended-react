@@ -1,15 +1,14 @@
-import { useState } from "react";
-import Header from './components/Header/Header';
-import InputArea from './components/InputArea/InputArea';
-import FilterBrands from './components/FilterBrands/FilterBrands';
-import Popup from "./components/Popup/Popup";
-import Sort from './components/Sort/Sort'
-import useFilters from './hooks/useFilters';
+import React, { useState } from "react";
+import Header from "../widgets/Header/Header";
+import InputArea from "../widgets/InputArea/InputArea";
+import FilterBrands from "../widgets/FilterBrands/FilterBrands";
+import Popup from "../shared/ui/Popup";
+import Sort from "../widgets/Sort/Sort";
+import useFilters from "../shared/hooks/useFilters";
 
-import s from './App.module.css';
-import React from "react";
+import s from "./MainPage.module.css";
 
-const App: React.FC = () => {
+const MainPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("https://auto.ru/cars/used/?");
   const [showPopup, setShowPopup] = useState(false);
 
@@ -40,21 +39,18 @@ const App: React.FC = () => {
       setInputValue((prev) => {
         const url = new URL(prev);
         const sortValue = sort.split("=")[1];
-        url.searchParams.set('sort', sortValue);
+        url.searchParams.set("sort", sortValue);
         return url.toString();
       });
     } else {
       setActiveSort(null);
       setInputValue((prev) => {
         const url = new URL(prev);
-        url.searchParams.delete('sort');
+        url.searchParams.delete("sort");
         return url.toString();
       });
     }
   };
-  
-  
-  
 
   return (
     <div className={s.wrapper}>
@@ -78,4 +74,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default MainPage;

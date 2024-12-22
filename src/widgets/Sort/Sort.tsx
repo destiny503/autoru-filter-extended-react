@@ -1,4 +1,4 @@
-import { sorts } from '../../assets/sorts';
+import { sorts } from '../../entities/sorts';
 
 import s from './Sort.module.css'
 

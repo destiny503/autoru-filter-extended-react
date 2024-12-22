@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { brandData } from "../../../assets/brands";
+import { brandData } from "../../entities/brands";
 import ActionPad from "../ActionPad/ActionPad";
 
 import s from "./ButtonPad.module.css";
