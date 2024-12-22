@@ -10,7 +10,7 @@ export const brandData = [
     { name: "КОРЕЙСКИЕ", brand: "VENDOR9" },
     { name: "КИТАЙСКИЕ", brand: "VENDOR10" },
     { name: "РОССИЙСКИЕ", brand: "VENDOR11", special: true },
-    { name: "УКРАИНСКИЕ😆", brand: "VENDOR12", special: true },
+    { name: "УКРАИНСКИЕ)", brand: "VENDOR12", special: true },
     // { name: "ПУСТОЙ", brand: "VENDOR13", special: true },
     { name: "АНГЛИЙСКИЕ", brand: "VENDOR14", special: true },
     { name: "Abarth", brand: "ABARTH" },
